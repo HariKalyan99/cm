@@ -20,8 +20,7 @@ export async function POST(request, _) {
             return NextResponse.json({error: "Invalid password"}, {status: 400});
         }
 
-        console.log(userExists, isPasswordVerified)
-        const token = jwt.sign({userId: userExists._id, email: userExists.email}, process.env.JWT_SECRET_KEY ,{
+        const token = jwt.sign({id: userExists._id, email: userExists.email, username: userExists.username}, process.env.JWT_SECRET_KEY ,{
             expiresIn: "1d",
         })
 
@@ -32,7 +31,6 @@ export async function POST(request, _) {
         })
 
         return response;
-        // return NextResponse.json({message: "User registered",success:true, user}, {status: 201})
     } catch (error) {
         return NextResponse.json({message: "An error occured while registering the user"}, {status: 500})
     }

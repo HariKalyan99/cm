@@ -1,11 +1,24 @@
 "use client"
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useEffect } from 'react'
 import toast from 'react-hot-toast'
 
 const Dashboard = () => {
   const router = useRouter();
+
+  useEffect(() => {
+    const fetchUserData = async() => {
+      try {
+        const {data} = await axios.get("api/userdata");
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchUserData()
+  }, [])
   const handleLogout = async() => {
     try {
       const {data} = await axios.get('api/logout');
