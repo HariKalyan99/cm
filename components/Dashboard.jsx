@@ -1,12 +1,14 @@
 "use client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import BlogCard from "./BlogCard";
+import Cookies from 'js-cookie';
 
 const Dashboard = () => {
   const router = useRouter();
+  const [postList, setPostList] = useState([]);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -20,6 +22,26 @@ const Dashboard = () => {
 
     fetchUserData();
   }, []);
+
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      const token = Cookies.get('jwt');
+      try {
+        const {data} = await axios.get("api/blogs", {
+          headers: {
+              'Authorization': `Bearer ${token}`,  
+              'Content-Type': 'application/json'
+          },
+      });
+
+      setPostList(data.blogs)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchBlogs();
+  }, [])
   const handleLogout = async () => {
     try {
       const { data } = await axios.get("api/logout");
@@ -56,7 +78,7 @@ const Dashboard = () => {
       </button>
       
       <div className="h-[auto] w-[100vw] flex flex-wrap justify-center items-center gap-5">
-        {[1,2,3,4,5,6].map((_, ind) => <BlogCard key={ind}/>)}
+        {postList?.length > 0 ? postList?.map((_, ind) => <BlogCard blogs={_} key={ind}/>) : (<h1>No blogs!!</h1>)}
       </div>
     </section>
   );

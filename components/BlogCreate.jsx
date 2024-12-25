@@ -3,8 +3,10 @@ import axios from 'axios';
 import Link from 'next/link'
 import React, { useEffect, useRef, useState } from 'react'
 import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
 
 const BlogCreate = () => {
+    const router = useRouter();
     const [error, setError] = useState("");
     const [newBlog, setNewBlog] = useState("");
     const titleRef = useRef("");
@@ -21,7 +23,8 @@ const BlogCreate = () => {
                         'Content-Type': 'application/json'
                     },
                 });
-                console.log(data);
+                // console.log(data);
+                router.push("/home");
             } catch (error) {
                 console.log(error);
             }
@@ -38,8 +41,6 @@ const BlogCreate = () => {
         e.preventDefault();
         const title = titleRef.current.value;
         const content = contentRef.current.value;
-
-
         setNewBlog({title, content});
     }
   return (
