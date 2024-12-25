@@ -1,13 +1,33 @@
 "use client";
 import Link from "@node_modules/next/link";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
+  const router = useRouter();
   const usernameRef = useRef("");
   const emailRef = useRef("");
   const passwordRef = useRef("");
-  const [error, setError] = useState();
+  const [error, setError] = useState("");
+  const [newUser, setNewUser] = useState("");
+
+  useEffect(() => {
+    const signupUser = async(user) => {
+      try {
+        const { data } = await axios.post("api/register", user);
+        toast.success(data.message);
+        router.push("/");
+      } catch (error) {
+        console.log("Error occured during registration.", error.response.data.error);
+        toast.error(error.response.data.error)
+      }
+    }
+    if(newUser.username && newUser.password && newUser.email){
+      signupUser(newUser);
+    }
+  }, [newUser])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,18 +42,7 @@ const RegisterForm = () => {
     }
     setError("");
 
-    try {
-      const { data } = await axios.post("api/register", {
-        username,
-        email,
-        password,
-      });
-
-      console.log(data);
-     
-    } catch (error) {
-      console.log("Error occured during registration.", error);
-    }
+    setNewUser({username, password, email});
   };
   return (
     <div className="grid place-items-center h-screen">

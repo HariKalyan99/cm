@@ -12,7 +12,6 @@ export async function POST(request, _) {
         if(userExists){
             return NextResponse.json({error: "User already exists"}, {status: 400});
         }
-
         const newUser = new User({username, email, password: hashedPassword});
         const user = await newUser.save();
         return NextResponse.json({message: "User registered",success:true, user}, {status: 201})
