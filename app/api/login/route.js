@@ -2,6 +2,7 @@ import connectToMongo from "@db/connectToMongo";
 import User from "@models/user.model";
 import { NextResponse } from "@node_modules/next/server";
 import bcrypt from 'bcrypt';
+import { serialize } from "cookie";
 import jwt from 'jsonwebtoken';
 
 export async function POST(request, _) {
@@ -23,12 +24,21 @@ export async function POST(request, _) {
         const token = jwt.sign({id: userExists._id, email: userExists.email, username: userExists.username}, process.env.JWT_SECRET_KEY ,{
             expiresIn: "1d",
         })
-
+        
+    
         const response = NextResponse.json({message: "Login successfull", success: true}, {status: 200});
 
-        response.cookies.set("jwt", token, {
-            httpOnly: true,
-        })
+        // response.cookies.set("jwt", token, {
+        //     httpOnly: true,
+        // })
+
+        response.headers.set('Set-Cookie', serialize('jwt', token, {
+            httpOnly: process.env.NODE_ENV === 'production',
+            secure: process.env.NODE_ENV === 'production',
+            maxAge: 60 * 60 * 24, 
+            path: '/',       
+            sameSite: 'Lax', //for csrf attacks 
+        }));
 
         return response;
     } catch (error) {
