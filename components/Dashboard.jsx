@@ -78,7 +78,7 @@ const Dashboard = () => {
       </button>
       
       <div className="h-[auto] w-[100vw] flex flex-wrap justify-center items-center gap-5">
-        {postList?.length > 0 ? postList?.map((_, ind) => <BlogCard blogs={_} key={ind}/>) : (<h1>No blogs!!</h1>)}
+        {postList?.length > 0 ? postList?.map((_) => <BlogCard blogs={_} key={_._id}/>) : (<h1>No blogs!!</h1>)}
       </div>
     </section>
   );

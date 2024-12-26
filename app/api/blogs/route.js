@@ -8,7 +8,7 @@ export async function GET(request) {
         const authorize = request.headers.get('Authorization');
     if (!authorize || !authorize.startsWith('Bearer ')) {
       return NextResponse.json(
-        { message: 'Authorization token missing or invalid' },
+        { message: 'Authorization token is invalid' },
         { status: 401 }
       );
     }
@@ -33,7 +33,7 @@ export async function POST(request) {
         const authorize = request.headers.get('Authorization');
     if (!authorize || !authorize.startsWith('Bearer ')) {
       return NextResponse.json(
-        { message: 'Authorization token missing or invalid' },
+        { message: 'Authorization token is invalid' },
         { status: 401 }
       );
     }

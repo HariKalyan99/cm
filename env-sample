@@ -1,0 +1,3 @@
+MONGO_URI=mongodb+srv://harikalyan99tronics:L2JNVNjPaX2dFAbQ@cluster76.sumyu.mongodb.net/
+JWT_SECRET_KEY=zciuW05P0SDYjUH01h2ikHmvROR374CPi6DauSCe0Lw=
+NODE_ENV=development

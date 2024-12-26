@@ -1,10 +1,15 @@
+"use client"
+
+import Link from '@node_modules/next/link';
 import React from 'react'
 import { FaUserAlt } from "react-icons/fa";
 
 
 const BlogCard = ({blogs}) => {
+
   return (
-    <div className="h-[400px] w-[300px] border shadow-lg flex flex-col justify-evenly p-5 rounded">
+    <Link href={`/blogdetails/${blogs._id}`}>
+    <div className="min-h-[400px] h-[auto] w-[300px] border shadow-lg flex flex-col justify-evenly p-5 rounded">
           <h1>
             <span className="font-bold">Title:</span> {blogs.title}
           </h1>
@@ -21,6 +26,7 @@ const BlogCard = ({blogs}) => {
           </div>
           
         </div>
+    </Link>
   )
 }
 

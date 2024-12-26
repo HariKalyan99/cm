@@ -12,13 +12,13 @@ export async function POST(request, _) {
         const userExists = await User.findOne({email});
         
         if(!userExists){
-            return NextResponse.json({error: "Invalid credentials"}, {status: 400});
+            return NextResponse.json({error: "Seems like you have not Signed up!"}, {status: 400});
         }
         
         const isPasswordVerified = await bcrypt.compare(password, userExists.password);
         
         if(!isPasswordVerified){
-            return NextResponse.json({error: "Invalid password"}, {status: 400});
+            return NextResponse.json({error: "Invalid credentials"}, {status: 400});
         }
 
         const token = jwt.sign({id: userExists._id, email: userExists.email, username: userExists.username}, process.env.JWT_SECRET_KEY ,{
