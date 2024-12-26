@@ -4,6 +4,7 @@ import { useParams } from '@node_modules/next/navigation';
 import Cookies from 'js-cookie';
 import React, { useEffect, useState } from 'react'
 import BlogDetailsCard from './BlogDetailsCard';
+import Navigation from './Navigation';
 
 const BlogDetails = () => {
     const { id } = useParams();
@@ -29,6 +30,7 @@ const BlogDetails = () => {
     }, [id])
   return (
     <div>
+      <Navigation write={false}/>
       {blogDetails?.length > 0 && blogDetails?.map(((blog, ind) => <BlogDetailsCard blog={blog} key={ind}/>))}
     </div>
   )

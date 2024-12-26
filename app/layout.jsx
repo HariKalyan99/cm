@@ -1,4 +1,6 @@
+import Navigation from "@components/Navigation";
 import "@styles/global.css";
+import Cookies from "js-cookie";
 
 export const metadata = {
   title: "Blog CMS",
@@ -6,10 +8,13 @@ export const metadata = {
 };
 
 const RootLayout = ({ children }) => {
+  const token = Cookies.get('jwt');
+
   return (
     <html lang="en">
       <body>
-        <main className="app">{children}</main>
+        {token && <Navigation />}
+        <main>{children}</main>
       </body>
     </html>
   );

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import React, { useEffect, useRef, useState } from 'react'
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
+import Navigation from './Navigation';
 
 const BlogCreate = () => {
     const router = useRouter();
@@ -23,7 +24,6 @@ const BlogCreate = () => {
                         'Content-Type': 'application/json'
                     },
                 });
-                // console.log(data);
                 router.push("/home");
             } catch (error) {
                 console.log(error);
@@ -44,14 +44,16 @@ const BlogCreate = () => {
         setNewBlog({title, content});
     }
   return (
-    <section className='grid place-items-center h-screen'>
-        <div className='shadow-lg p-5 rounded-lg border-t-4 border-blue-400'>
+   <>
+   <Navigation />
+   <section className='grid place-items-center h-screen bg-[#A6A6A6]'>
+        <div className='shadow-lg p-5 rounded-lg bg-[white] border-t-4 border-[#FF66C4]'>
             <h1 className='text-xl font-bold my-4'>What's new today?</h1>
 
             <form className='flex flex-col gap-3' onSubmit={(e) => handleBlogSubmit(e)}>
                 <input type="text" placeholder='Title of your blog' required ref={titleRef}/>
-                <textarea type="text" placeholder='Description of your blog' required ref={contentRef}/>
-                <button className='bg-blue-600 text-white font-bold cursor-pointer px-6 py-2' type='submit'>
+                <textarea type="text" placeholder='Description of your blog' required ref={contentRef} rows={10}/>
+                <button className='bg-[black] text-white font-bold cursor-pointer px-6 py-2' type='submit'>
                     Add Blog
                 </button>
 
@@ -60,6 +62,7 @@ const BlogCreate = () => {
             </form>
         </div>
     </section>
+   </>
   )
 }
 

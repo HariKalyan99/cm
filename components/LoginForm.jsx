@@ -20,7 +20,6 @@ const LoginForm = () => {
          toast.success(data.message);
         router.push("/home");
       } catch (error) {
-        // console.log("Error occured during login.", error.response.data.error);
         setError("Please input right email and password");
         toast.error(error.response.data.error)
       }
@@ -46,13 +45,13 @@ const LoginForm = () => {
 
   return (
     <div className='grid place-items-center h-screen'>
-        <div className='shadow-lg p-5 rounded-lg border-t-4 border-green-400'>
+        <div className='shadow-lg p-5 rounded-lg border-t-4 border-[#A6A6A6]'>
             <h1 className='text-xl font-bold my-4'>Enter the details</h1>
 
             <form className='flex flex-col gap-3' onSubmit={(e) => handleLogin(e)}>
                 <input type="email" placeholder='Enter your email' required ref={emailRef}/>
                 <input type="password" placeholder='Enter your password' required ref={passwordRef}/>
-                <button className='bg-green-600 text-white font-bold cursor-pointer px-6 py-2'>
+                <button className='bg-[#FF66C4] text-white font-bold cursor-pointer px-6 py-2'>
                     Login
                 </button>
 

@@ -1,28 +1,14 @@
 "use client";
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 import BlogCard from "./BlogCard";
 import Cookies from 'js-cookie';
+import Navigation from "./Navigation";
+import { RiReactjsFill } from "react-icons/ri";
 
 const Dashboard = () => {
-  const router = useRouter();
   const [postList, setPostList] = useState([]);
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const { data } = await axios.get("api/userdata");
-        console.log(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchUserData();
-  }, []);
-
+  
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -42,45 +28,24 @@ const Dashboard = () => {
     }
     fetchBlogs();
   }, [])
-  const handleLogout = async () => {
-    try {
-      const { data } = await axios.get("api/logout");
-      toast.success(data.message);
-      router.push("/");
-    } catch (error) {
-      toast.error(error.response.data.error);
-    }
-  };
+
   return (
+    <>
+    <Navigation write={true}/>
     <section className="w-full flex-center flex-col">
       <h1 className="head_text text-center">
-        Discover & Share
+        Tron's Blog post
         <br className="max-md:hidden" />
-        <span className="orange_gradient text-center">AI - Powered Promts</span>
+        <span className="text-center">Revolutionizing the Blog's Space</span>
       </h1>
-      <p className="desc text-center">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Numquam quos
-        beatae itaque aliquid, vel illo atque voluptatibus voluptas odio
-        reprehenderit eaque laboriosam ipsam vero! Libero nemo reprehenderit in
-        doloremque nostrum!
+      <p className="sub_text text-center">
+      Exploring the Future of Decentralized Technology with TRON: Innovation, Growth, and Impact
       </p>
-      <button
-        className="bg-red-500 text-white font-bold px-6  py-2 mt-3"
-        onClick={() => handleLogout()}
-      >
-        Logout
-      </button>
-      <button
-        className="bg-green-500 text-white font-bold px-6  py-2 mt-3"
-        onClick={() => router.push("/newblog")}
-      >
-        Create Blog
-      </button>
-      
-      <div className="h-[auto] w-[100vw] flex flex-wrap justify-center items-center gap-5">
-        {postList?.length > 0 ? postList?.map((_) => <BlogCard blogs={_} key={_._id}/>) : (<h1>No blogs!!</h1>)}
+      <div className="h-[auto] w-[100vw] flex justify-start items-center gap-5 my-5 p-5">
+        {postList?.length > 0 ? postList?.map((_) => <BlogCard blogs={_} key={_._id}/>) : postList?.length === 0 ? <h1 className="head_text text-center w-full">No blogs here</h1> : (<div className="animate-spin h-5 w-5"><RiReactjsFill /></div>)}
       </div>
     </section>
+    </>
   );
 };
 
