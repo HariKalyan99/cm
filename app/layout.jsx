@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 export const metadata = {
   title: "Blog CMS",
   description: "Discover feature blogs",
+  icon: "/tron.svg"
 };
 
 const RootLayout = ({ children }) => {
