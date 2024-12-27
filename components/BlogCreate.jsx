@@ -5,10 +5,10 @@ import React, { useEffect, useRef, useState } from 'react'
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 import Navigation from './Navigation';
+import toast from '@node_modules/react-hot-toast/dist';
 
 const BlogCreate = () => {
     const router = useRouter();
-    const [error, setError] = useState("");
     const [newBlog, setNewBlog] = useState("");
     const titleRef = useRef("");
     const contentRef = useRef("");
@@ -24,9 +24,12 @@ const BlogCreate = () => {
                         'Content-Type': 'application/json'
                     },
                 });
-                router.push("/home");
+                if(data.success){
+                    router.push("/home");
+                    toast.success('Blog added')
+                }
             } catch (error) {
-                console.log(error);
+                toast.success(error);
             }
         }
 
@@ -56,9 +59,6 @@ const BlogCreate = () => {
                 <button className='bg-[black] text-white font-bold cursor-pointer px-6 py-2' type='submit'>
                     Add Blog
                 </button>
-
-                {error && <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">{error}</div>}
-               
             </form>
         </div>
     </section>

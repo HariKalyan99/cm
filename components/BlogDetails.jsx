@@ -20,7 +20,9 @@ const BlogDetails = () => {
                     'Content-Type': 'application/json'
                 },
             })
-            setBlogDetails(data.blogs);
+            if(data.success){
+              setBlogDetails(data.blogs);
+            }
           } catch (error) {
             console.log(error);
           }

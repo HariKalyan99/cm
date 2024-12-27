@@ -17,7 +17,7 @@ export async function GET(request) {
         const token = authorize.split(' ')[1];
         const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
         const blogs = await Blog.find({userId: decodedToken.id});
-        return NextResponse.json({message: 'blog fetched', blogs}, {status: 200});
+        return NextResponse.json({message: 'blog fetched', blogs, success: true}, {status: 200});
     }
     } catch (error) {
         console.log(error)

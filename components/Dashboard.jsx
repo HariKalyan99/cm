@@ -20,8 +20,10 @@ const Dashboard = () => {
               'Content-Type': 'application/json'
           },
       });
+      if(data.success){
+        setPostList(data.blogs)
+      }
 
-      setPostList(data.blogs)
       } catch (error) {
         console.log(error);
       }

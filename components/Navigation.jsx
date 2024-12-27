@@ -18,7 +18,9 @@ const Navigation = ({write}) => {
     const fetchUserData = async () => {
       try {
         const { data } = await axios.get("api/userdata");
-        localStorage.setItem("username", JSON.stringify(data.data.username));
+        if(data.success){
+          localStorage.setItem("username", JSON.stringify(data.data.username));
+        }
       } catch (error) {
         console.log(error);
       }

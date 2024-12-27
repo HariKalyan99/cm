@@ -17,8 +17,10 @@ const LoginForm = () => {
     const loginUser = async(user) => {
       try {
         const {data} = await axios.post('api/login', user);
-         toast.success(data.message);
-        router.push("/home");
+         if(data.success){
+          toast.success(data.message);
+          router.push("/home");
+         }
       } catch (error) {
         setError("Please input right email and password");
         toast.error(error.response.data.error)

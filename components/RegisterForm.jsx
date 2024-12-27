@@ -17,8 +17,10 @@ const RegisterForm = () => {
     const signupUser = async(user) => {
       try {
         const { data } = await axios.post("api/register", user);
-        toast.success(data.message);
-        router.push("/");
+        if(data.success){
+          toast.success(data.message);
+          router.push("/");
+        }
       } catch (error) {
         console.log("Error occured during registration.", error.response.data.error);
         toast.error(error.response.data.error)
