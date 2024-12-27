@@ -3,7 +3,7 @@
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaUserAlt } from "react-icons/fa";
 
@@ -14,12 +14,14 @@ import { CiHome } from "react-icons/ci";
 
 const Navigation = ({write}) => {
   const router = useRouter();
+  const [username, setUsername] = useState("");
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const { data } = await axios.get("api/userdata");
         if(data.success){
-          localStorage.setItem("username", JSON.stringify(data.data.username));
+          window.localStorage.setItem("username", JSON.stringify(data.data.username));
+          setUsername(JSON.parse(localStorage.getItem("username")))
         }
       } catch (error) {
         console.log(error);
@@ -33,7 +35,7 @@ const Navigation = ({write}) => {
     try {
       const { data } = await axios.get("api/logout");
       toast.success(data.message);
-      localStorage.clear();
+      window.localStorage.clear();
       router.push("/");
     } catch (error) {
       toast.error(error.response.data.error);
@@ -71,7 +73,7 @@ const Navigation = ({write}) => {
         </li>
 
         <li>
-          <span className="font-bold fs-1 text-white">{JSON.parse(localStorage.getItem("username"))}</span>
+          <span className="font-bold fs-1 text-white">{username}</span>
         </li>
       </ul>
     </div>
