@@ -1,6 +1,5 @@
 'use client'
 import axios from 'axios';
-import Link from 'next/link'
 import React, { useEffect, useRef, useState } from 'react'
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
@@ -14,7 +13,6 @@ const BlogCreate = () => {
     const contentRef = useRef("");
 
     useEffect(() => {
-
         const addNewBlog = async(blog) => {
             const token = Cookies.get('jwt');
             try {
@@ -24,12 +22,12 @@ const BlogCreate = () => {
                         'Content-Type': 'application/json'
                     },
                 });
-                if(data.success){
+                if(data.status){
+                    toast.success(data.message);
                     router.push("/home");
-                    toast.success('Blog added')
                 }
             } catch (error) {
-                toast.success(error);
+                toast.error(error);
             }
         }
 

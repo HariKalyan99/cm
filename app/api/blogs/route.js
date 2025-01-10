@@ -51,10 +51,12 @@ export async function POST(request) {
         }
 
         const blog = await newBlog.save();
-        return NextResponse.json({message: 'blog added successfully', blog}, {status: 201});
+        return NextResponse.json({message: 'blog added successfully', blog, status: true}, {status: 201});
     }
     } catch (error) {
         console.log(error)
         return NextResponse.json({message: 'error creating blog'}, {status: 500});
     }
 }
+
+

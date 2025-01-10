@@ -31,6 +31,7 @@ const Dashboard = () => {
     fetchBlogs();
   }, [])
 
+
   return (
     <>
     <Navigation write={true}/>
@@ -43,8 +44,8 @@ const Dashboard = () => {
       <p className="sub_text text-center">
       Exploring the Future of Decentralized Technology with TRON: Innovation, Growth, and Impact
       </p>
-      <div className="h-[auto] w-[100vw] flex justify-start items-center gap-5 my-5 p-5">
-        {postList?.length > 0 ? postList?.map((_) => <BlogCard blogs={_} key={_._id}/>) : postList?.length === 0 ? <h1 className="head_text text-center w-full">No blogs here</h1> : (<div className="animate-spin h-5 w-5"><RiReactjsFill /></div>)}
+      <div className="h-[auto] w-[100%] flex justify-center items-center gap-5 my-5 p-5 flex-wrap ">
+        {postList?.length > 0 ? postList?.map((_) => <BlogCard postList={postList} setPostList={setPostList} blogs={_} key={_._id}/>) : postList?.length === 0 ? <h1 className="head_text text-center w-full">No blogs here</h1> : (<div className="animate-spin h-5 w-5"><RiReactjsFill /></div>)}
       </div>
     </section>
     </>
