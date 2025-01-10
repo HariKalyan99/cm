@@ -14,8 +14,8 @@ export async function POST(request, _) {
         }
         const newUser = new User({username, email, password: hashedPassword});
         const user = await newUser.save();
-        return NextResponse.json({message: "User registered",success:true, user}, {status: 201})
+        return NextResponse.json({message: "User registered",success:true, user}, {status: 201});
     } catch (error) {
-        return NextResponse.json({message: "An error occured while registering the user"}, {status: 500})
+        return NextResponse.json({message: "An error occured while registering the user"}, {status: 500});
     }
 }

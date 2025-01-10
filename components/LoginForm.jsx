@@ -53,14 +53,14 @@ const LoginForm = () => {
             <form className='flex flex-col gap-3' onSubmit={(e) => handleLogin(e)}>
                 <input type="email" placeholder='Enter your email' required ref={emailRef}/>
                 <input type="password" placeholder='Enter your password' required ref={passwordRef}/>
-                <button className='bg-[#FF66C4] text-white font-bold cursor-pointer px-6 py-2'>
+                <button className='bg-[#FF66C4] hover:bg-[grey] text-white font-bold cursor-pointer px-6 py-2'>
                     Login
                 </button>
 
                 {error && <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">{error}</div>}
 
                 <Link className='text-sm mt-3 text-right' href={"/register"}>
-                Don't have an account? <span className='underline'>Register</span>
+                Don't have an account? <span className='underline hover:text-[grey]'>Register</span>
                 </Link>
             </form>
         </div>

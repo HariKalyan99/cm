@@ -1,4 +1,5 @@
 import Navigation from "@components/Navigation";
+import { Toaster } from "@node_modules/react-hot-toast/dist";
 import "@styles/global.css";
 import Cookies from "js-cookie";
 
@@ -16,6 +17,7 @@ const RootLayout = ({ children }) => {
       <body>
         {token && <Navigation />}
         <main>{children}</main>
+        <Toaster />
       </body>
     </html>
   );

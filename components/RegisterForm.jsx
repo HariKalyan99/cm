@@ -64,7 +64,7 @@ const RegisterForm = () => {
             ref={passwordRef}
           />
           <button
-            className="bg-[#FF66C4] text-white font-bold cursor-pointer px-6 py-2"
+            className="bg-[#FF66C4] text-white font-bold cursor-pointer px-6 py-2 hover:bg-[grey]"
             type="submit"
           >
             Register
@@ -77,7 +77,7 @@ const RegisterForm = () => {
           )}
 
           <Link className="text-sm mt-3 text-right" href={"/"}>
-            Already have an account? <span className="underline">Login</span>
+            Already have an account? <span className="underline hover:text-[grey]">Login</span>
           </Link>
         </form>
       </div>

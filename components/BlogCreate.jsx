@@ -23,8 +23,8 @@ const BlogCreate = () => {
                     },
                 });
                 if(data.status){
-                    toast.success(data.message);
                     router.push("/home");
+                    toast.success(data.message);
                 }
             } catch (error) {
                 toast.error(error);
@@ -54,7 +54,7 @@ const BlogCreate = () => {
             <form className='flex flex-col gap-3' onSubmit={(e) => handleBlogSubmit(e)}>
                 <input type="text" placeholder='Title of your blog' required ref={titleRef}/>
                 <textarea type="text" placeholder='Description of your blog' required ref={contentRef} rows={10}/>
-                <button className='bg-[black] text-white font-bold cursor-pointer px-6 py-2' type='submit'>
+                <button className='bg-[black] text-white font-bold cursor-pointer px-6 py-2 hover:bg-[grey]' type='submit'>
                     Add Blog
                 </button>
             </form>

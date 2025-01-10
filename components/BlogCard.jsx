@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { FaUserAlt } from "react-icons/fa";
 import { RiDeleteBin5Fill } from "react-icons/ri";
-import toast, { Toaster } from '@node_modules/react-hot-toast/dist';
+import toast from '@node_modules/react-hot-toast/dist';
 
 
 const BlogCard = ({ blogs, setPostList, postList }) => {
@@ -22,8 +22,8 @@ const BlogCard = ({ blogs, setPostList, postList }) => {
           },
         });
         if(data.status){
-          toast.success(data.message);
           setPostList(postList.filter(x => x._id !== id));
+          toast.success(data.message);
         }
       } catch (error) {
         toast.error(error);
@@ -65,7 +65,6 @@ const BlogCard = ({ blogs, setPostList, postList }) => {
       <span onClick={() => handleBlogDelete(blogs._id)}>
         <RiDeleteBin5Fill className="text-[white] text-3xl hover:text-[pink] hover:cursor-pointer" />
       </span>
-      <Toaster />
     </div>
   );
 };
