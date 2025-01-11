@@ -84,7 +84,7 @@ textarea {
 .head_text {
     font-size: 72px;
     font-weight: bold;
-    background: -webkit-linear-gradient(#FF66C4, #838383);
+    background: -webkit-linear-gradient(#FF66C4, #353434);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
