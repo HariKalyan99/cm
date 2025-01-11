@@ -68,18 +68,24 @@ const BlogCard = ({ blogs, setPostList, postList }) => {
               {"  "} {blogs.author}
             </span>
           </div>
-          <div className="flex gap-5">
-            <span onClick={() => handleBlogDelete(blogs._id)}>
-              <RiDeleteBin5Fill className="text-[white] text-3xl hover:text-[pink] hover:cursor-pointer" />
-            </span>
-
-            <span onClick={() => setOpenEditTab((prev) => !prev)}>
-              <BiSolidEdit className="text-[white] text-3xl hover:text-[pink] hover:cursor-pointer" />
-            </span>
-          </div>
+          {JSON.parse(localStorage.getItem("username")) === blogs.author && (
+            <div className="flex gap-5">
+              <span onClick={() => handleBlogDelete(blogs._id)}>
+                <RiDeleteBin5Fill className="text-[white] text-3xl hover:text-[pink] hover:cursor-pointer" />
+              </span>
+              <span onClick={() => setOpenEditTab((prev) => !prev)}>
+                <BiSolidEdit className="text-[white] text-3xl hover:text-[pink] hover:cursor-pointer" />
+              </span>
+            </div>
+          )}
         </div>
       ) : (
-        <BlogEdit setOpenEditTab={setOpenEditTab} setPostList={setPostList} postList={postList} blogs={blogs}/>
+        <BlogEdit
+          setOpenEditTab={setOpenEditTab}
+          setPostList={setPostList}
+          postList={postList}
+          blogs={blogs}
+        />
       )}
     </>
   );
