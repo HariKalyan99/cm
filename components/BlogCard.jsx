@@ -47,7 +47,10 @@ const BlogCard = ({ blogs, setPostList, postList }) => {
         <div className="min-h-[400px] h-[auto] w-[500px] border border-t-[#838383] border-t-8 border-t-[#FF66C4] border-b-8 shadow hover:shadow-lg flex flex-col justify-evenly p-5 rounded bg-black rounded-xl">
           <h1 className="text-white text-xl">
             <span className="font-bold text-[2rem]">Title:</span>
-            {"  "} {blogs.title.slice(0, 100)}
+            {"  "}{" "}
+            {blogs.title?.length > 100
+              ? blogs.title.slice(0, 100) + "..."
+              : blogs.title}
           </h1>
           <p className="text-white text-xl">
             <span className="font-bold text-[2rem]">Description:</span>

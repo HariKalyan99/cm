@@ -108,18 +108,22 @@ const Navigation = ({ write }) => {
           </li>
         )}
 
-        {write !== "profile" && <div
-          className="flex justify-center items-center gap-2 hover:cursor-pointer"
-          onClick={() => router.push("/profile")}
-        >
-          <li className="rounded-full border shadow h-10 w-10 flex justify-center items-center">
-            <FaUserAlt className="text-white" />
-          </li>
+        {write !== "profile" && (
+          <div
+            className="flex justify-center items-center gap-2"
+            onClick={() => router.push("/profile")}
+          >
+            <li className="rounded-full border shadow h-10 w-10 flex justify-center items-center">
+              <FaUserAlt className="text-white hover:cursor-pointer hover:text-[pink]" />
+            </li>
 
-          <li>
-            <span className="font-bold fs-1 text-white">{username || JSON.parse(localStorage.getItem("username"))}</span>
-          </li>
-        </div>}
+            <li>
+              <span className="font-bold fs-1 text-white hover:cursor-pointer hover:text-[pink]">
+                {username || JSON.parse(localStorage.getItem("username"))}
+              </span>
+            </li>
+          </div>
+        )}
       </ul>
     </div>
   );
