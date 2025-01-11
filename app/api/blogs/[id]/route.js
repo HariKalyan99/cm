@@ -4,58 +4,64 @@ import connectToMongo from "@db/connectToMongo";
 import Blog from "@models/blog.model";
 
 
-// keep this for the profile fetch 
-
-// export async function GET(request) {
-//   try {
-//       const authorize = request.headers.get('Authorization');
-//   if (!authorize || !authorize.startsWith('Bearer ')) {
-//     return NextResponse.json(
-//       { message: 'Authorization token is invalid' },
-//       { status: 401 }
-//     );
-//   }
-//   await connectToMongo();
-//   if(authorize){
-//       const token = authorize.split(' ')[1];
-//       const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
-//       const blogs = await Blog.find({userId: decodedToken.id});
-//       return NextResponse.json({message: 'blog fetched', blogs, success: true}, {status: 200});
-//   }
-//   } catch (error) {
-//       console.log(error)
-//       return NextResponse.json({message: 'error fetching user blogs'}, {status: 500});
-//   }
-// }
 
 export async function GET(request, { params }) {
   const { id } = await params;
-  try {
-    const authorize = request.headers.get("Authorization");
-    if (!authorize || !authorize.startsWith("Bearer ")) {
+  if (id) {
+    console.log(id);
+    try {
+      const authorize = request.headers.get("Authorization");
+      if (!authorize || !authorize.startsWith("Bearer ")) {
+        return NextResponse.json(
+          { message: "Authorization token is invalid" },
+          { status: 401 }
+        );
+      }
+      await connectToMongo();
+      if (authorize) {
+        const token = authorize.split(" ")[1];
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        if (decodedToken) {
+          const blogs = await Blog.find({ _id: id });
+          return NextResponse.json(
+            { message: "blog details fetched", blogs, success: true },
+            { status: 200 }
+          );
+        }
+      }
+    } catch (error) {
+      console.log(error);
       return NextResponse.json(
-        { message: "Authorization token is invalid" },
-        { status: 401 }
+        { message: "error fetching user blogs" },
+        { status: 500 }
       );
     }
-    await connectToMongo();
-    if (authorize) {
-      const token = authorize.split(" ")[1];
-      const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
-      if (decodedToken) {
-        const blogs = await Blog.find({ _id: id });
+  } else {
+    try {
+      const authorize = request.headers.get("Authorization");
+      if (!authorize || !authorize.startsWith("Bearer ")) {
         return NextResponse.json(
-          { message: "blog details fetched", blogs, success: true },
+          { message: "Authorization token is invalid" },
+          { status: 401 }
+        );
+      }
+      await connectToMongo();
+      if (authorize) {
+        const token = authorize.split(" ")[1];
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        const blogs = await Blog.find({ userId: decodedToken.id });
+        return NextResponse.json(
+          { message: "blog fetched", blogs, success: true },
           { status: 200 }
         );
       }
+    } catch (error) {
+      console.log(error);
+      return NextResponse.json(
+        { message: "error fetching user blogs" },
+        { status: 500 }
+      );
     }
-  } catch (error) {
-    console.log(error);
-    return NextResponse.json(
-      { message: "error fetching user blogs" },
-      { status: 500 }
-    );
   }
 }
 
@@ -133,6 +139,7 @@ export async function PUT(request, { params }) {
           { status: 404 }
         );
       }
+      console.log(existingBlog.userId.toString() , decodedToken.id, existingBlog)
 
       if (existingBlog.userId.toString() !== decodedToken.id) {
         return NextResponse.json(

@@ -32,7 +32,7 @@ const BlogDetails = () => {
     }, [id])
   return (
     <div>
-      <Navigation write={false}/>
+      <Navigation write={"back"}/>
       {blogDetails?.length > 0 && blogDetails?.map(((blog, ind) => <BlogDetailsCard blog={blog} key={ind}/>))}
     </div>
   )

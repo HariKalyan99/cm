@@ -46,7 +46,7 @@ const BlogCreate = () => {
     }
   return (
    <>
-   <Navigation />
+   <Navigation write={"back"}/>
    <section className='grid place-items-center h-screen bg-[#A6A6A6]'>
         <div className='shadow-lg p-5 rounded-lg bg-[white] border-t-4 border-[#FF66C4]'>
             <h1 className='text-xl font-bold my-4'>What's new today?</h1>
