@@ -9,8 +9,9 @@ import { RiDeleteBin5Fill } from "react-icons/ri";
 import { BiSolidEdit } from "react-icons/bi";
 import toast from "@node_modules/react-hot-toast/dist";
 import BlogEdit from "./BlogEdit";
+import PropTypes from "prop-types";
 
-const BlogProfileCard = ({blogs, setPostList, postList, profile}) => {
+const BlogProfileCard = ({blogs, setPostList, postList}) => {
     const [deleteBlogId, setDeleteBlogId] = useState("");
     const [openEditTab, setOpenEditTab] = useState(false);
   
@@ -91,5 +92,23 @@ const BlogProfileCard = ({blogs, setPostList, postList, profile}) => {
     );
   
 }
+
+BlogProfileCard.propTypes = {
+  blogs: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+  }).isRequired,
+  setPostList: PropTypes.func.isRequired,
+  postList: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+};
 
 export default BlogProfileCard

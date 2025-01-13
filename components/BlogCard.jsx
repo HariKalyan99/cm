@@ -9,8 +9,10 @@ import { RiDeleteBin5Fill } from "react-icons/ri";
 import { BiSolidEdit } from "react-icons/bi";
 import toast from "@node_modules/react-hot-toast/dist";
 import BlogEdit from "./BlogEdit";
+import PropTypes from "prop-types";
 
-const BlogCard = ({ blogs, setPostList, postList }) => {
+const BlogCard = (props) => {
+  const { blogs, setPostList, postList } = props;
   const [deleteBlogId, setDeleteBlogId] = useState("");
   const [openEditTab, setOpenEditTab] = useState(false);
 
@@ -44,7 +46,7 @@ const BlogCard = ({ blogs, setPostList, postList }) => {
   return (
     <>
       {!openEditTab ? (
-        <div className="min-h-[400px] h-[auto] w-[500px] border border-t-[#838383] border-t-8 border-t-[#FF66C4] border-b-8 shadow hover:shadow-lg flex flex-col justify-evenly p-5 rounded bg-black rounded-xl">
+        <div className="min-h-[400px] h-[auto] w-[500px] border border-t-[#838383] border-t-8 border-t-[#FF66C4] border-b-8 shadow-xl flex flex-col justify-evenly p-5 rounded bg-black rounded-xl">
           <h1 className="text-white text-xl">
             <span className="font-bold text-[2rem]">Title:</span>
             {"  "}{" "}
@@ -92,6 +94,24 @@ const BlogCard = ({ blogs, setPostList, postList }) => {
       )}
     </>
   );
+};
+
+BlogCard.propTypes = {
+  blogs: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+  }).isRequired,
+  setPostList: PropTypes.func.isRequired,
+  postList: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 };
 
 export default BlogCard;

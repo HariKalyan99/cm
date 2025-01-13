@@ -1,4 +1,4 @@
-const { NextResponse } = require("next/server");
+import { NextResponse } from "@node_modules/next/server";
 
 export async function middleware(request) {
     const path = request.nextUrl.pathname;

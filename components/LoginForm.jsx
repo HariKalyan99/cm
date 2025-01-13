@@ -60,7 +60,7 @@ const LoginForm = () => {
                 {error && <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">{error}</div>}
 
                 <Link className='text-sm mt-3 text-right' href={"/register"}>
-                Don't have an account? <span className='underline hover:text-[grey]'>Register</span>
+                Don`t have an account? <span className='underline hover:text-[grey]'>Register</span>
                 </Link>
             </form>
         </div>

@@ -4,8 +4,9 @@ import { NextResponse } from "@node_modules/next/server";
 import bcrypt from 'bcrypt';
 import { serialize } from "cookie";
 import jwt from 'jsonwebtoken';
+import process from 'process'
 
-export async function POST(request, _) {
+export async function POST(request) {
     try {
         const {email, password} = await request.json();
         await connectToMongo();

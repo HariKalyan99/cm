@@ -9,6 +9,8 @@ import { FaUserAlt } from "react-icons/fa";
 
 import { PiNotePencilThin } from "react-icons/pi";
 import { CiHome } from "react-icons/ci";
+import PropTypes from "prop-types";
+
 
 const Navigation = ({ write }) => {
   const router = useRouter();
@@ -22,7 +24,7 @@ const Navigation = ({ write }) => {
             "username",
             JSON.stringify(data.data.username)
           );
-          setUsername(JSON.parse(localStorage.getItem("username")));
+          setUsername(JSON.parse(localStorage.getItem("username") || ""));
         }
       } catch (error) {
         console.log(error);
@@ -128,5 +130,9 @@ const Navigation = ({ write }) => {
     </div>
   );
 };
+
+Navigation.propTypes ={
+  write: PropTypes.string.isRequired,
+}
 
 export default Navigation;

@@ -2,46 +2,46 @@
 
 import axios from "@node_modules/axios";
 import Cookies from "js-cookie";
+import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { MdOutlineEditOff } from "react-icons/md";
 
 const BlogEdit = ({ setOpenEditTab, blogs, postList, setPostList }) => {
   const [blogTitle, setBlogTitle] = useState(blogs.title);
   const [blogContent, setBlogContent] = useState(blogs.content);
-
   const [editBlog, setEditBlog] = useState("");
 
   useEffect(() => {
-    const updateBlog = async(blog, id) => {
-        try {
-            const token = Cookies.get('jwt');
-            const {data} = await axios.put(`/api/blogs/${id}`, blog,  {
-                headers: {
-                    'Authorization': `Bearer ${token}`,  
-                    'Content-Type': 'application/json'
-                }
-            });
-            const index = postList.findIndex(x => x._id === data.blog._id);
-            postList.splice(index,1,data.blog);
-            setPostList([...postList]);
-            setOpenEditTab(prev => !prev);
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    const updateBlog = async (blog, id) => {
+      try {
+        const token = Cookies.get("jwt");
+        const { data } = await axios.put(`/api/blogs/${id}`, blog, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
 
-    if(editBlog?.title){
-        updateBlog(editBlog, blogs._id)
+        const index = postList.findIndex((x) => x._id === data.blog._id);
+        postList.splice(index, 1, data.blog);
+        setPostList([...postList]);
+        setOpenEditTab((prev) => !prev);
+      } catch (error) {
+        console.error(error); // Use console.error for errors
+      }
+    };
+
+    if (editBlog?.title) {
+      updateBlog(editBlog, blogs._id);
     }
-  }, [editBlog])
+  }, [editBlog, blogs._id, postList, setOpenEditTab, setPostList]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const title = blogTitle;
     const content = blogContent;
-    setEditBlog({title, content});
-  }
-
+    setEditBlog({ title, content });
+  };
 
   return (
     <div>
@@ -57,7 +57,6 @@ const BlogEdit = ({ setOpenEditTab, blogs, postList, setPostList }) => {
           onChange={(e) => setBlogTitle(e.target.value)}
         />
         <textarea
-          type="text"
           placeholder="Description of your blog"
           required
           rows={10}
@@ -77,6 +76,25 @@ const BlogEdit = ({ setOpenEditTab, blogs, postList, setPostList }) => {
       </form>
     </div>
   );
+};
+
+BlogEdit.propTypes = {
+  blogs: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+  }).isRequired,
+  setPostList: PropTypes.func.isRequired,
+  postList: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  setOpenEditTab: PropTypes.bool.isRequired,
 };
 
 export default BlogEdit;

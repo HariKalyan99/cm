@@ -37,9 +37,9 @@ const Dashboard = () => {
     <Navigation write={"create"}/>
     <section className="w-full flex-center flex-col bg-[#A6A6A6] min-h-[100vh]">
       <h1 className="head_text text-center">
-        Tron's Blog post
+        Tron`s Blog post
         <br className="max-md:hidden" />
-        <span className="text-center">Revolutionizing the Blog's Space</span>
+        <span className="text-center">Revolutionizing the Blog`s Space</span>
       </h1>
       <p className="sub_text text-center">
       Exploring the Future of Decentralized Technology with TRON: Innovation, Growth, and Impact

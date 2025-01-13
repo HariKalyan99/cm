@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import Navigation from "./Navigation";
 import axios from "@node_modules/axios";
 import Cookies from "js-cookie";
-import BlogCard from "./BlogCard";import { RiReactjsFill } from "react-icons/ri";
 import BlogProfileCard from "./BlogProfileCard";
 
 
@@ -39,7 +38,7 @@ const Profile = () => {
       <Navigation write={"profile"} />
       <section className="w-full flex-center flex-col bg-[#A6A6A6] min-h-[100vh]">
         <h1 className="head_text text-center">
-          {JSON.parse(localStorage.getItem("username"))}'s Blog post
+          {JSON.parse(localStorage.getItem("username"))}`s Blog post
           <br className="max-md:hidden" />
         </h1>
 

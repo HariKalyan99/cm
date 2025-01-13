@@ -1,6 +1,7 @@
-const { NextResponse } = require("next/server");
 import User from '@models/user.model';
+import { NextResponse } from '@node_modules/next/server';
 import jwt from 'jsonwebtoken';
+import process from 'process'
 
 export async function GET(request) {
     try {

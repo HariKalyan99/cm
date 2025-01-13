@@ -2,6 +2,7 @@ import connectToMongo from "@db/connectToMongo";
 import Blog from "@models/blog.model";
 import { NextResponse } from "@node_modules/next/server";
 import jwt from 'jsonwebtoken';
+import process from 'process'
 
 
 export async function GET(request) {
