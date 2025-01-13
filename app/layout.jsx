@@ -16,6 +16,11 @@ const RootLayout = ({ children }) => {
 
   return (
     <html lang="en">
+      <head>
+        <meta name="description" content={metadata.description} />
+        <link rel="icon" href={metadata.icon} />
+        <title>{metadata.title}</title>
+      </head>
       <body>
         {token && <Navigation />}
         <main>{children}</main>
