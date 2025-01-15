@@ -27,14 +27,14 @@ const BlogEdit = ({ setOpenEditTab, blogs, postList, setPostList }) => {
         setPostList([...postList]);
         setOpenEditTab((prev) => !prev);
       } catch (error) {
-        console.error(error); // Use console.error for errors
+        console.error(error); 
       }
     };
 
     if (editBlog?.title) {
       updateBlog(editBlog, blogs._id);
     }
-  }, [editBlog, blogs._id, postList, setOpenEditTab, setPostList]);
+  }, [editBlog]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

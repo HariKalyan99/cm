@@ -2,13 +2,12 @@ import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import connectToMongo from "@db/connectToMongo";
 import Blog from "@models/blog.model";
-
+import process from 'process'
 
 
 export async function GET(request, { params }) {
   const { id } = await params;
   if (id) {
-    console.log(id);
     try {
       const authorize = request.headers.get("Authorization");
       if (!authorize || !authorize.startsWith("Bearer ")) {
@@ -139,7 +138,6 @@ export async function PUT(request, { params }) {
           { status: 404 }
         );
       }
-      console.log(existingBlog.userId.toString() , decodedToken.id, existingBlog)
 
       if (existingBlog.userId.toString() !== decodedToken.id) {
         return NextResponse.json(

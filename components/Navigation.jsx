@@ -12,19 +12,16 @@ import { CiHome } from "react-icons/ci";
 import PropTypes from "prop-types";
 
 
+
 const Navigation = ({ write }) => {
   const router = useRouter();
-  const [username, setUsername] = useState("");
+  const [getUserName, setUserName] = useState("");
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const { data } = await axios.get("api/userdata");
         if (data.success) {
-          window.localStorage.setItem(
-            "username",
-            JSON.stringify(data.data.username)
-          );
-          setUsername(JSON.parse(localStorage.getItem("username") || ""));
+         setUserName(data.data.username);
         }
       } catch (error) {
         console.log(error);
@@ -38,7 +35,7 @@ const Navigation = ({ write }) => {
     try {
       const { data } = await axios.get("api/logout");
       toast.success(data.message);
-      window.localStorage.clear();
+      localStorage.clear();
       router.push("/");
     } catch (error) {
       toast.error(error.response.data.error);
@@ -121,7 +118,7 @@ const Navigation = ({ write }) => {
 
             <li>
               <span className="font-bold fs-1 text-white hover:cursor-pointer hover:text-[pink]">
-                {username || JSON.parse(localStorage.getItem("username"))}
+                {getUserName ? getUserName : ""}
               </span>
             </li>
           </div>
