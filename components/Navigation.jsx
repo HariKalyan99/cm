@@ -21,6 +21,7 @@ const Navigation = ({ write }) => {
       try {
         const { data } = await axios.get("api/userdata");
         if (data.success) {
+         localStorage.setItem("username", JSON.stringify(data.data.username));
          setUserName(data.data.username);
         }
       } catch (error) {
